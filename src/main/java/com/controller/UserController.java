@@ -24,6 +24,10 @@ public interface UserController {
 	public List<Product> getProductData();
 
 	public boolean deleteProduct(int productId);
+
+	Product getProductById(int productId);
+
+	boolean updateProduct(Product p);
 	
 	
 }

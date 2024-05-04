@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Television World</title>
@@ -64,50 +65,19 @@
 
     <div class="products">
     
+       <c:forEach items="${products}" var="product">
         <div class="productcontainer1">
-            <img class="productimage1" src="images/Slider/img1.jpg" height="350" width="350">
+            <img class="productimage1" src="images/Slider/img2.jpg" alt="${product.productName}" height="350" width="350">
             <div class="description1">
-                <h1>Haier</h1>
-                <p>LED 4k</p><br>
-                <h2>Rs.55000</h2><br>
+                <h1>${product.productName}</h1>
+                <p>${product.category}</p><br>
+                <h2>Rs.${product.price}</h2><br>
                 <div align="center">
-                    <button onclick="location.href='#'">More Details</button>
+                    <button onclick="location.href='productDetails?id=${product.id}'">More Details</button>
                 </div>  
             </div>
         </div>
-        <div class="productcontainer2">
-            <img class="productimage2" src="images/Slider/img2.jpg" height="350" width="350">
-            <div class="description2">
-                <h1>Panasonic</h1>
-                <p>4k LED</p><br>
-                <h2>Rs.99000.99</h2><br>
-                <div align="center">
-                    <button onclick="location.href='#'">More Details</button>
-                </div>  
-            </div>
-        </div>
-        <div class="productcontainer3">
-            <img class="productimage3" src="images/Slider/img3.jpg"height="350" width="350">
-            <div class="description3">
-                <h1>LG</h1>
-                <p>UHD</p><br>
-                <h2><s>Rs.129000.99</s>Rs.99000.99</h2><br>
-                <div align="center">
-                    <button onclick="location.href='#'">More Details</button>
-                </div>  
-            </div>
-        </div>
-        <div class="productcontainer4">
-            <img class="productimage4" src="images/Slider/img4.jpg"height="350" width="350">
-            <div class="description4">
-                <h1>TCL</h1>
-                <p>4k HD QLED</p><br>
-                <h2><s>Rs.12000.99</s>Rs.99000.99</h2><br>
-                <div align="center">
-                    <button onclick="location.href='#'">More Details</button>
-                </div>  
-            </div>
-        </div>
+    </c:forEach>
     </div> 
     <div class="container1">
 		<h3>Check out all our Products</h3><br>

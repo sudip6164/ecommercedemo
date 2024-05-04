@@ -51,10 +51,7 @@ public class edit extends HttpServlet {
 	
 	request.setAttribute("userList", userList);
 	request.getRequestDispatcher("edit.jsp").forward(request, response);
-		
-		
-		
-		
+				
 	}
 
 }

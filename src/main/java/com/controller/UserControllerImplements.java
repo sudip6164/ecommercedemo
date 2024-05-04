@@ -230,5 +230,42 @@ public class UserControllerImplements  implements UserController{
 	    }
 	}
 
+	@Override
+	public Product getProductById(int productId) {
+	    String sql = "SELECT * FROM product WHERE id = ?";
+	    Product product = null;
+	    try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+	        pstm.setInt(1, productId);
+	        ResultSet rs = pstm.executeQuery();
+	        if (rs.next()) {
+	            product = new Product();
+	            product.setId(rs.getInt("id"));
+	            product.setProductName(rs.getString("productName"));
+	            product.setCategory(rs.getString("category"));
+	            product.setPrice(rs.getFloat("price"));
+	            product.setProductImage(rs.getString("productImage"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return product;
+	}
+
+	@Override
+	public boolean updateProduct(Product p) {
+	    String sql = "UPDATE product SET productName=?, price=?, category=?, productImage=? WHERE id=?";
+	    try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+	        pstm.setString(1, p.getProductName());
+	        pstm.setFloat(2, p.getPrice());
+	        pstm.setString(3, p.getCategory());
+	        pstm.setString(4, p.getProductImage());
+	        pstm.setInt(5, p.getId());
+	        return pstm.executeUpdate() > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 	
 }

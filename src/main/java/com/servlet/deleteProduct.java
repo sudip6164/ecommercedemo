@@ -26,8 +26,10 @@ public class deleteProduct extends HttpServlet {
         
         if (success) {
             request.setAttribute("message", "Product deleted successfully");
+            System.out.println("Product deleted successfully");
         } else {
             request.setAttribute("message", "Product deletion failed");
+            System.out.println("Product not deleted");
         }
         response.sendRedirect("showAllProducts"); // Redirect to the product list page
     }
