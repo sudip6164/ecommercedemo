@@ -267,5 +267,40 @@ public class UserControllerImplements  implements UserController{
 	    }
 	}
 
-	
+	public User getUserByUsername(String username) {
+	    String sql = "SELECT * FROM usertable WHERE username = ?";
+	    try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+	        pstm.setString(1, username);
+	        ResultSet rs = pstm.executeQuery();
+	        if (rs.next()) {
+	            User user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setUsername(rs.getString("username"));
+	            user.setPassword(rs.getString("password"));
+	            user.setEmail(rs.getString("email"));
+	            user.setUtype(rs.getString("utype"));
+	            return user;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
+	public boolean updateUserProfile(User u) {
+	    String sql = "UPDATE usertable SET username=?, email=?, password=? WHERE id=?";
+	    try {
+	        PreparedStatement pstm = conn.prepareStatement(sql);
+	        pstm.setString(1, u.getUsername());
+	        pstm.setString(2, u.getEmail());
+	        pstm.setString(3, u.getPassword());
+	        pstm.setInt(4, u.getId());
+	        int rowsAffected = pstm.executeUpdate();
+	        return rowsAffected > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 }

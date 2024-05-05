@@ -33,6 +33,10 @@
                 
             <li>
             <li>
+                <a href="UserProfileServlet"><b>User Profile</b></a></li>
+                
+            <li>
+            <li>
             <a href="logout"><b>Logout</b></a></li>
             <li>
                 <input type="text" placeholder="Search.."></li>

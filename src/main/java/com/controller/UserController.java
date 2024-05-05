@@ -28,6 +28,10 @@ public interface UserController {
 	Product getProductById(int productId);
 
 	boolean updateProduct(Product p);
+
+	public User getUserByUsername(String username);
+
+	public boolean updateUserProfile(User user);
 	
 	
 }
