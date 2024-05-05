@@ -20,13 +20,20 @@
         <!--the center options in the navbar-->
         <ul class= "centernav">
             <li>
-                <a href="../view/product.html"><b>Our Products</b></a></li>
+                <a href="productPageUser"><b>Our Products</b></a></li>
             <li>
                 <a href="../view/AboutUS.html"><b>About Us</b></a></li>
             <li>
                 <a href="../view/contact.html"><b>Contact Us</b></a></li> 
             <li>
                 <a href="../view/chooseus.html"><b>Why Choose Us?</b></a></li>
+            <li>
+            <li>
+                <a href="viewCart"><b>Cart</b></a></li>
+                
+            <li>
+            <li>
+            <a href="logout"><b>Logout</b></a></li>
             <li>
                 <input type="text" placeholder="Search.."></li>
         </ul> 
@@ -63,21 +70,52 @@
     <!--product cards in the best sellers-->
     <h1 class="titles">Our Best Sellers</h1><br>
 
-    <div class="products">
+     <div class="products">
     
-       <c:forEach items="${products}" var="product">
         <div class="productcontainer1">
-            <img class="productimage1" src="images/${product.productImage}" alt="${product.productName}" height="350" width="350">
+            <img class="productimage1" src="images/Slider/img1.jpg" height="350" width="350">
             <div class="description1">
-                <h1>${product.productName}</h1>
-                <p>${product.category}</p><br>
-                <h2>Rs.${product.price}</h2><br>
+                <h1>Haier</h1>
+                <p>LED 4k</p><br>
+                <h2>Rs.55000</h2><br>
                 <div align="center">
-                    <button onclick="location.href='productDetails?id=${product.id}'">More Details</button>
+                    <button onclick="location.href='#'">More Details</button>
                 </div>  
             </div>
         </div>
-    </c:forEach>
+        <div class="productcontainer2">
+            <img class="productimage2" src="images/Slider/img2.jpg" height="350" width="350">
+            <div class="description2">
+                <h1>Panasonic</h1>
+                <p>4k LED</p><br>
+                <h2>Rs.99000.99</h2><br>
+                <div align="center">
+                    <button onclick="location.href='#'">More Details</button>
+                </div>  
+            </div>
+        </div>
+        <div class="productcontainer3">
+            <img class="productimage3" src="images/Slider/img3.jpg"height="350" width="350">
+            <div class="description3">
+                <h1>LG</h1>
+                <p>UHD</p><br>
+                <h2><s>Rs.129000.99</s>Rs.99000.99</h2><br>
+                <div align="center">
+                    <button onclick="location.href='#'">More Details</button>
+                </div>  
+            </div>
+        </div>
+        <div class="productcontainer4">
+            <img class="productimage4" src="images/Slider/img4.jpg"height="350" width="350">
+            <div class="description4">
+                <h1>TCL</h1>
+                <p>4k HD QLED</p><br>
+                <h2><s>Rs.12000.99</s>Rs.99000.99</h2><br>
+                <div align="center">
+                    <button onclick="location.href='#'">More Details</button>
+                </div>  
+            </div>
+        </div>
     </div> 
     <div class="container1">
 		<h3>Check out all our Products</h3><br>
