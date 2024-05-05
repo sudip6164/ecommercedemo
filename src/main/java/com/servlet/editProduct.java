@@ -2,11 +2,18 @@ package com.servlet;
 
 import java.io.IOException;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.controller.UserController;
 import com.controller.UserControllerImplements;
@@ -14,6 +21,7 @@ import com.model.Product;
 
 
 @WebServlet("/editProduct")
+@MultipartConfig
 public class editProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int productId = Integer.parseInt(request.getParameter("id"));
@@ -28,7 +36,22 @@ public class editProduct extends HttpServlet {
         String productName = request.getParameter("productName");
         String category = request.getParameter("category");
         float price = Float.parseFloat(request.getParameter("price"));
-        String productImage = request.getParameter("productImage"); // This should be handled similarly to your add function
+        
+        Part filePart = request.getPart("productImage"); // Get the file part
+        String fileName = getFileName(filePart); // Extract file name from the part
+
+        String productImage = null;
+        if (fileName != null && !fileName.isEmpty()) {
+            String uploadDir = getServletContext().getRealPath("") + File.separator + "images";
+            File file = new File(uploadDir, fileName);
+
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+            productImage = fileName; // Use new image
+        } else {
+            productImage = request.getParameter("currentImage"); // Fallback to current image if no new image was uploaded
+        }
         
         Product product = new Product();
         product.setId(productId);
@@ -47,5 +70,17 @@ public class editProduct extends HttpServlet {
             request.setAttribute("product", product);
             request.getRequestDispatcher("/editProduct.jsp").forward(request, response);
         }
+    }
+    
+    private String getFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        if (contentDisp != null) {
+            for (String cd : contentDisp.split(";")) {
+                if (cd.trim().startsWith("filename")) {
+                    return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                }
+            }
+        }
+        return null;
     }
 }

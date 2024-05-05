@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Edit Product</h1>
-<form action="editProduct" method="post">
+<form action="editProduct" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${product.id}"/>
     <p>Name: <input type="text" name="productName" value="${product.productName}"/></p>
     <p>Category: <input type="text" name="category" value="${product.category}"/></p>

@@ -48,7 +48,9 @@ public class addNewProduct extends HttpServlet {
 		
 		Part filePart = request.getPart("image");
 		String fileName = getFileName(filePart);
-		String uploadDir ="/images";
+		String uploadDir = getServletContext().getRealPath("") + File.separator + "images";
+		System.out.println(fileName);
+		System.out.println(uploadDir);
 		File uploadDirFile = new File(uploadDir);
 		if (!uploadDirFile.exists()) {
             uploadDirFile.mkdirs(); // Create directory if it doesn't exist
@@ -82,7 +84,6 @@ public class addNewProduct extends HttpServlet {
 	            }
 	        }
 			return null;
-
 	}
 
 }

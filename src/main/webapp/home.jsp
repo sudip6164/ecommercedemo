@@ -67,7 +67,7 @@
     
        <c:forEach items="${products}" var="product">
         <div class="productcontainer1">
-            <img class="productimage1" src="images/Slider/img2.jpg" alt="${product.productName}" height="350" width="350">
+            <img class="productimage1" src="images/${product.productImage}" alt="${product.productName}" height="350" width="350">
             <div class="description1">
                 <h1>${product.productName}</h1>
                 <p>${product.category}</p><br>
